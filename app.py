@@ -23,6 +23,10 @@ def show_item(item_id):
 @app.route("/new_item")
 def new_item():
     return render_template("new_item.html")
+@app.route("/edit_item/<int:item_id>")
+def edit_item(item_id):
+    item=items.get_item(item_id)
+    return render_template("edit_item.html", item=item)
 @app.route("/create_item", methods=["POST"])
 def create_item():
     title=request.form["title"]
@@ -31,6 +35,16 @@ def create_item():
     user_id=session["user_id"]
     items.add_item(title, description, story, user_id)
     return redirect("/")
+@app.route("/update_item", methods=["POST"])
+def update_item():
+    item_id= request.form["item_id"]
+    title=request.form["title"]
+    description=request.form["description"]
+    story=request.form["story"]
+
+    items.update_item(item_id, title, description, story)
+    return redirect("/item/"+str(item_id))
+
 @app.route("/register")
 def register():
     return render_template("register.html")
