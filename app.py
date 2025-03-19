@@ -27,14 +27,19 @@ def new_item():
 def edit_item(item_id):
     item=items.get_item(item_id)
     return render_template("edit_item.html", item=item)
-@app.route("/create_item", methods=["POST"])
-def create_item():
-    title=request.form["title"]
-    description=request.form["description"]
-    story=request.form["story"]
-    user_id=session["user_id"]
-    items.add_item(title, description, story, user_id)
-    return redirect("/")
+
+@app.route("/remove_item/<int:item_id>", methods=["GET","POST"])
+def remove_item(item_id):
+    if request.method=="GET":
+        item=items.get_item(item_id)
+        return render_template("remove_item.html", item=item)
+    if request.method=="POST":
+        if "remove" in request.form:
+            items.remove_item(item_id)
+            return redirect("/")
+        else:
+            return redirect("/item/"+str(item_id))
+
 @app.route("/update_item", methods=["POST"])
 def update_item():
     item_id= request.form["item_id"]
@@ -44,6 +49,15 @@ def update_item():
 
     items.update_item(item_id, title, description, story)
     return redirect("/item/"+str(item_id))
+
+@app.route("/create_item", methods=["POST"])
+def create_item():
+    title=request.form["title"]
+    description=request.form["description"]
+    story=request.form["story"]
+    user_id=session["user_id"]
+    items.add_item(title, description, story, user_id)
+    return redirect("/")
 
 @app.route("/register")
 def register():
