@@ -77,9 +77,14 @@ def update_item():
     if item["user_id"]!=session["user_id"]:
         abort(403)
     title=request.form["title"]
+    if not title or len(title)>60:
+        abort(403)
     description=request.form["description"]
+    if not description or len(description)>400:
+        abort(403)
     story=request.form["story"]
-
+    if not story:
+        abort(403)
     items.update_item(item_id, title, description, story)
     return redirect("/item/"+str(item_id))
 
@@ -90,7 +95,7 @@ def create_item():
     title=request.form["title"]
     if not title or len(title)>60:
         abort(403)
-    
+
     description=request.form["description"]
     if not description or len(description)>400:
         abort(403)

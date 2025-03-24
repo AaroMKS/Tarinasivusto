@@ -10,16 +10,16 @@
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
-      <input type="text" name="title" value="{{ item.title }}" />
+      <input type="text" name="title" value="{{ item.title }}" maxlength="60" required />
     </p>
     <p>
       Juonikuvaus: <br />
-      <textarea name="description" rows="10" cols="70">{{item.description}}</textarea>
+      <textarea name="description" rows="10" cols="70" maxlength="400" required >{{item.description}}</textarea>
      
     </p>
     <p>
       Tarina: <br />
-      <textarea name="story" rows="50" cols="100">{{ item.story}}</textarea>
+      <textarea name="story" rows="50" cols="100" required >{{ item.story}}</textarea>
      
     </p>
     <input type="hidden" name="item_id" value="{{ item.id }}" />
