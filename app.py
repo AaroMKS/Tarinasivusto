@@ -88,8 +88,15 @@ def create_item():
     require_login()
 
     title=request.form["title"]
+    if not title or len(title)>60:
+        abort(403)
+    
     description=request.form["description"]
+    if not description or len(description)>400:
+        abort(403)
     story=request.form["story"]
+    if not story:
+        abort(403)
     user_id=session["user_id"]
     items.add_item(title, description, story, user_id)
     return redirect("/")
