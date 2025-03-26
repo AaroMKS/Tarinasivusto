@@ -15,14 +15,33 @@
     <p>
       Juonikuvaus: <br />
       <textarea name="description" rows="10" cols="70" maxlength="400"></textarea required>
-     
+ 
+    </p>
+
+    <p>
+      Genre: <br />
+      <select name="genre">
+        <option value="">Ei genreä</option>
+        <option value="Kauhu">Kauhu</option>
+        <option value="Fantasia">Fantasia</option>
+        <option value="Rikos">Rikos</option>
+        <option value="Draama">Draama</option>
+      </select>
+    </p>
+    <p>
+      Ikärajasuositus: <br />
+      <select name="agerating">
+        <option value="Sopii kaikenikäisille">Sopii kaikenikäisille</option>
+        <option value="Sopii vain yli 7-vuotiaille">Sopii vain yli 7-vuotiaille</option>
+        <option value="Sopii vain yli 12-vuotiaille">Sopii vain yli 12-vuotiaille</option>
+        <option value="Kielletty alle 18-vuotialta">Sopii vain yli 18-vuotialta</option>
+      </select>
     </p>
     <p>
       Tarina: <br />
       <textarea name="story" rows="50" cols="100"></textarea required>
      
     </p>
-    
     <input type="submit" value="Julkaise tarina" />
   </form>
 </body>
