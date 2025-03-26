@@ -48,7 +48,8 @@ def show_item(item_id):
 @app.route("/new_item")
 def new_item():
     require_login()
-    return render_template("new_item.html")
+    classes=items.get_all_classes()
+    return render_template("new_item.html", classes=classes)
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
     require_login()
@@ -106,21 +107,21 @@ def create_item():
         abort(403)
 
     description=request.form["description"]
+
     if not description or len(description)>400:
         abort(403)
     story=request.form["story"]
     if not story:
         abort(403)
     user_id=session["user_id"]
+
     classes=[]
-    genre=request.form["genre"]
 
-    if genre:
-        classes.append(("Genre",genre))
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts=entry.split(":")
+            classes.append((parts[0], parts[1]))
 
-    agerating=request.form["agerating"]
-    if agerating:
-        classes.append(("Ikäraja", agerating))
 
 
     items.add_item(title, description, story, user_id, classes)
