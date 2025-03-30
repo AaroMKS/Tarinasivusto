@@ -47,11 +47,22 @@
   </ul>
   <h2>Uusi arvostelu</h2>
   <form action="/create_review" method="post">
-    Arvosana (väliltä 1-10): 
-    <input type="text" name="grade" size="8" pattern="^([1-9]|10)$" required />
+    Arvosana (väliltä 1-10):
+    <select name="grade">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
     <br />
     Kirjoita arvostelu: <br />
-    <textarea name="review" rows="10" cols="70" required ></textarea> <br />
+    <textarea name="review" rows="10" cols="70" maxlength="400" ></textarea> <br />
     <input type="hidden" name="item_id" value="{{  item.id  }}" />
     <input type="submit" value="Kirjoita arvostelu" />
   </form>

@@ -167,7 +167,7 @@ def create_review():
     #user_id=session["user_id"]
 
     review=request.form["review"]
-    if not review:
+    if not review or len(review)>400:
         abort(403)
 
     item_id=request.form["item_id"]
