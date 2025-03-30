@@ -15,6 +15,7 @@ def add_item(title, description, story, user_id, classes):
     db.execute(sql, [title, description, story, user_id])
 
     item_id=db.last_insert_id()
+
     sql="INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
     for title, value in classes:
         db.execute(sql, [item_id, title, value])
