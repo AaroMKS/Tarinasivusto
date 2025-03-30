@@ -39,6 +39,22 @@
     </ul>
   </p>
   {% endif %}
+  <h2>Arvostelut</h2>
+  <ul>
+    {% for post in reviews %}
+    <li>{{  post.grade }}, {{  post.review  }}, <a href="/user/{{ post.user_id }}">{{  post.username  }}</a></li>
+    {% endfor %}
+  </ul>
+  <h2>Uusi arvostelu</h2>
+  <form action="/create_review" method="post">
+    Arvosana (väliltä 1-10): 
+    <input type="text" name="grade" size="8" pattern="^([1-9]|10)$" required />
+    <br />
+    Kirjoita arvostelu: <br />
+    <textarea name="review" rows="10" cols="70" required ></textarea> <br />
+    <input type="hidden" name="item_id" value="{{  item.id  }}" />
+    <input type="submit" value="Kirjoita arvostelu" />
+  </form>
 
   <p>
     <a href="/">Takaisin</a>
