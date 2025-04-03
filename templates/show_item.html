@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>{{ item.title }}</title>
-</head>
+{% block title %}{{ item.title }}{% endblock %}
 
-<body>
-  <h1>{{ item.title }}</h1>
+
+{% block content %}
+  <h2>{{ item.title }}</h2>
 
   {% if session.user_id == item.user_id %}
   
@@ -43,13 +41,13 @@
     </ul>
   </p>
   {% endif %}
-  <h2>Arvostelut</h2>
+  <h3>Arvostelut</h3>
   <ul>
     {% for post in reviews %}
     <li>{{  post.grade }}, {{  post.review  }}, <a href="/user/{{ post.user_id }}">{{  post.username  }}</a></li>
     {% endfor %}
   </ul>
-  <h2>Uusi arvostelu</h2>
+  <h3>Uusi arvostelu</h3>
   <form action="/create_review" method="post">
     Arvosana (väliltä 1-10):
     <select name="grade">
@@ -71,9 +69,4 @@
     <input type="submit" value="Kirjoita arvostelu" />
   </form>
 
-  <p>
-    <a href="/">Takaisin</a>
-  </p>
-</body>
-
-</html>
+{% endblock %}

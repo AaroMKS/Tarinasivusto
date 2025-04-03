@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Tarinan kuvat</title>
-</head>
+{% block title %}Tarinan muokkaus{% endblock %}
 
-<body>
-  <h1>Tarinan kuvat</h1>
+
+{% block content %}
+  <h2>Tarinan kuvat</h2>
   <p>
     Tarinassa on {{ images | count  }} kuvaa.
   </p>
@@ -22,7 +20,4 @@
     <a href="/item/{{  item.id  }}">Takaisin</a>
   </p>
 
-
-</body>
-
-</html>
+{% endblock %}

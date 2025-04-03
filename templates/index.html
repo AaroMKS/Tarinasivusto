@@ -1,40 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Tarinasivusto</title>
-</head>
-
-<body>
-  <h1>Tarinasivusto</h1> 
+{% block title %}Tarinasivusto{% endblock %}
 
 
-
-  {% if session.username %}
-  <p>
-    Olet kirjautunut nimellä {{ session.username }}
-  </p>
-{% endif %}
-
-<p>
-<a href="/find_item">Etsi ilmoitus</a> |
-{% if session.username %}
-<a href="/new_item">Uusi tarina</a> |
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/login">Kirjaudu sisään</a> |
-<a href="/register">Luo tunnus</a>
-{% endif %}
-</p>
-
-
-
+{% block content %}
 <h2>Tarinat</h2>
 <ul>
   {% for item in items %}
   <li><a href="/item/{{ item.id}}">{{ item.title }}</a></li>
   {% endfor %}
 </ul>
-</body>
-
-</html>
+{% endblock %}

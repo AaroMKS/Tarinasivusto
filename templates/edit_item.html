@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Tarinan muokkaus</title>
-</head>
+{% block title %}Tarinan muokkaus{% endblock %}
 
-<body>
-  <h1>Tarinan muokkaus</h1>
+
+{% block content %}
+  <h2>Tarinan muokkaus</h2>
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
@@ -41,6 +39,4 @@
     
     <input type="submit" value="Päivitä tarina" />
   </form>
-</body>
-
-</html>
+{% endblock %}

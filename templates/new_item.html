@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Uusi tarina</title>
-</head>
+{% block title %}Uusi tarina{% endblock %}
 
-<body>
+
+{% block content %}
   <h1>Uusi tarina</h1>
   <form action="/create_item" method="post">
     <p>
@@ -36,6 +34,4 @@
     </p>
     <input type="submit" value="Julkaise tarina" />
   </form>
-</body>
-
-</html>
+  {% endblock %}

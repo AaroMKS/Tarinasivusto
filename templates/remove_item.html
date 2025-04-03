@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Tarinan poisto</title>
-</head>
+{% block title %}Tarinan muokkaus{% endblock %}
 
-<body>
-  <h1>Tarinan poisto</h1>
+
+{% block content %}
+  <h2>Tarinan poisto</h2>
   <p>Ilmoitus: {{ item.title }}</p>
   <p>Haluatko varmasti poistaa tämän ilmoituksen</p>
 
@@ -15,6 +13,4 @@
     <input type="submit" name="remove" value="Poista ilmoitus">
     <input type="submit" name="back" value="Palaa takaisin">
   </form>
-</body>
-
-</html>
+{% endblock %}
