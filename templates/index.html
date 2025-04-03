@@ -7,27 +7,28 @@
 
 <body>
   <h1>Tarinasivusto</h1> 
+
+
+
   {% if session.username %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }}, id-numerosi on {{ session.user_id }}
+    Olet kirjautunut nimellä {{ session.username }}
   </p>
-  <p>
-    <a href="/logout">Kirjaudu ulos</a>
-  </p> 
-  <p>
-  <a href="/new_item">Uusi tarina</a>
-</p>
-  {% else %}
-  <p>
-  <a href="/login">Kirjaudu sisään</a>
-  <a href="/register">Luo tunnus</a>
+{% endif %}
 
-  </p>
-
-  {% endif %}
 <p>
-  <a href="/find_item">Etsi ilmoitus</a>
+<a href="/find_item">Etsi ilmoitus</a> |
+{% if session.username %}
+<a href="/new_item">Uusi tarina</a> |
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a> |
+<a href="/register">Luo tunnus</a>
+{% endif %}
 </p>
+
+
+
 <h2>Tarinat</h2>
 <ul>
   {% for item in items %}
