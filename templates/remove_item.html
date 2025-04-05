@@ -4,9 +4,8 @@
 
 
 {% block content %}
-  <h2>Tarinan poisto</h2>
-  <p>Ilmoitus: {{ item.title }}</p>
-  <p>Haluatko varmasti poistaa tämän ilmoituksen</p>
+  <h2>Poista tarina"{{ item.title }}"</h2>
+  <p>Haluatko varmasti poistaa tämän tarinan</p>
 
   <form action="/remove_item/{{item.id}}" method="post">
     

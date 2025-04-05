@@ -4,7 +4,10 @@
 
 
 {% block content %}
-  <h2>Tarinan muokkaus</h2>
+  <h2>Muokkaa "{{ item.title }}"</h2>
+  <p>
+    <a href="/item/{{  item.id  }}">Palaa takaisin</a>
+  </p>
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
@@ -39,4 +42,5 @@
     
     <input type="submit" value="Päivitä tarina" />
   </form>
+  
 {% endblock %}

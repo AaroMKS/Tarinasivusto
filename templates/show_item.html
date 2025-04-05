@@ -45,7 +45,7 @@
     <li>{{  post.grade }}, {{  post.review  }}, <a href="/user/{{ post.user_id }}">{{  post.username  }}</a></li>
     {% endfor %}
   </ul>
-  {% if session.user_idd %}
+  {% if session.user_id %}
   <h3>Uusi arvostelu</h3>
   <form action="/create_review" method="post">
     Arvosana (väliltä 1-10):
