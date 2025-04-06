@@ -11,9 +11,9 @@
 
 
 
-  {% if session.username %}
+  {% if session.user_id %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }}
+    Olet kirjautunut sisään nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>  
   </p>
 {% endif %}
 

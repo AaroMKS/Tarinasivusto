@@ -253,7 +253,7 @@ def create():
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat")
         return redirect("/register")
-        
+
 
 
     try:
@@ -261,7 +261,7 @@ def create():
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
-    
+
     return redirect("/")
 
 @app.route("/login", methods=["GET","POST"])
