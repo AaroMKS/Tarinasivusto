@@ -7,6 +7,8 @@ import config
 import items
 import users
 import re
+import markupsafe
+
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -21,6 +23,12 @@ def check_csrf():
     if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
 
+@app.template_filter()
+def show_lines(content):
+    content = str(markupsafe.escape(content))
+    content = content.replace("\n", "<br />")
+    return markupsafe.Markup(content)
+
 @app.route("/")
 def index():
     all_items=items.get_items()
@@ -30,7 +38,7 @@ def index():
 def show_user(user_id):
     user=users.get_user(user_id)
     if not user:
-         abort(404)
+        abort(404)
     items= users.get_items(user_id)
     return render_template("show_user.html", user=user, items=items)
 
@@ -48,7 +56,7 @@ def find_item():
 def show_item(item_id):
     item=items.get_item(item_id)
     if not item:
-         abort(404)
+        abort(404)
     classes=items.get_classes(item_id)
     reviews=items.get_reviews(item_id)
     images=items.get_images(item_id)
@@ -60,13 +68,10 @@ def edit_images(item_id):
     require_login()
     item=items.get_item(item_id)
     if not item:
-         abort(404)
+        abort(404)
     if item["user_id"]!=session["user_id"]:
         abort(403)
     images=items.get_images(item_id)
-    
-
-
     return render_template("images.html", item=item, images=images)
 
 @app.route("/add_image", methods=["POST"])
@@ -77,22 +82,14 @@ def add_image():
     item=items.get_item(item_id)
 
     if not item:
-         abort(404)
+        abort(404)
     if item["user_id"]!=session["user_id"]:
         abort(403)
 
-    
-    
     file = request.files["image"]
-    
-
     if not file.filename.endswith(".png"):
         return "VIRHE: väärä tiedostomuoto"
-
     image = file.read()
-    print(type(image))
-    
-    
     if len(image) > 100 * 1024:
         return "VIRHE: liian suuri kuva"
  
@@ -103,12 +100,8 @@ def add_image():
 @app.route("/image/<int:image_id>")
 def show_image(image_id):
     image = items.get_image(image_id)
-    
     if not image:
         abort(404)
-    
-     
-    
     response = make_response(bytes(image))
     response.headers.set("Content-Type", "image/png")
     return response 
@@ -166,7 +159,7 @@ def update_item():
     item_id= request.form["item_id"]
     item=items.get_item(item_id)
     if not item:
-         abort(404)
+        abort(404)
     if item["user_id"]!=session["user_id"]:
         abort(403)
     title=request.form["title"]
@@ -195,7 +188,7 @@ def update_item():
 
 @app.route("/create_item", methods=["POST"])
 def create_item():
-    
+
     require_login()
     check_csrf()
 
@@ -236,8 +229,6 @@ def create_review():
     grade=request.form["grade"]
     if not re.search("^([1-9]|10)$", grade):
         abort(403)
-    #user_id=session["user_id"]
-
     review=request.form["review"]
     if not review or len(review)>400:
         abort(403)
@@ -264,15 +255,11 @@ def create():
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat")
         return redirect("/register")
-
-
-
     try:
         users.create_user(username,password1)
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
-
     return redirect("/")
 
 @app.route("/login", methods=["GET","POST"])
