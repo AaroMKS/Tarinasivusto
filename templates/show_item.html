@@ -62,8 +62,8 @@
       <option value="10">10</option>
     </select>
     <br />
-    Kirjoita arvostelu: <br />
-    <textarea name="review" rows="10" cols="70" maxlength="400" ></textarea> <br />
+    <label for="review">Kirjoita arvostelu: </label><br />
+    <textarea name="review" id="review" rows="10" cols="70" maxlength="400" ></textarea> <br />
     <input type="hidden" name="item_id" value="{{  item.id  }}" />
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" value="Kirjoita arvostelu" />

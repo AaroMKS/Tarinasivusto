@@ -92,8 +92,7 @@ def add_image():
     image = file.read()
     if len(image) > 100 * 1024:
         return "VIRHE: liian suuri kuva"
- 
-    
+
     items.add_image(item_id, image)
     return redirect("/images/" + str(item_id))
 
@@ -106,8 +105,8 @@ def show_image(image_id):
     response.headers.set("Content-Type", "image/png")
     return response 
 
- 
-  
+
+
 @app.route("/new_item")
 def new_item():
     require_login()
@@ -121,7 +120,7 @@ def edit_item(item_id):
     require_login()
     item=items.get_item(item_id)
     if not item:
-         abort(404)
+        abort(404)
     if item["user_id"]!=session["user_id"]:
         abort(403)
     all_classes=items.get_all_classes()
@@ -140,7 +139,7 @@ def remove_item(item_id):
     require_login()
     item=items.get_item(item_id)
     if not item:
-         abort(404)
+        abort(404)
     if item["user_id"]!=session["user_id"]:
         abort(403)
     if request.method=="GET":
@@ -149,8 +148,7 @@ def remove_item(item_id):
         if "remove" in request.form:
             items.remove_item(item_id)
             return redirect("/")
-        else:
-            return redirect("/item/"+str(item_id))
+        return redirect("/item/"+str(item_id))
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
@@ -276,9 +274,9 @@ def login():
             session["username"] = username
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
-        else:
-            flash("VIRHE: Väärä tunnus tai salasana")
-            return redirect("/login")
+        
+        flash("VIRHE: Väärä tunnus tai salasana")
+        return redirect("/login")
 
 @app.route("/logout")
 def logout():

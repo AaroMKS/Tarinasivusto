@@ -44,7 +44,9 @@ def get_items():
     return db.query(sql)
 
 def get_item(item_id):
-    sql= """SELECT items.id, items.title, items.description, items.story, users.id user_id, users.username FROM items, users WHERE items.user_id = users.id AND items.id=?"""
+    sql= """SELECT items.id, items.title, items.description, items.story, users.id user_id, users.username
+        FROM items, users
+        WHERE items.user_id = users.id AND items.id=?"""
     result= db.query(sql, [item_id])
     return result[0] if result else None
 
@@ -70,7 +72,9 @@ def remove_item(item_id):
     db.execute(sql, [item_id])
 
 def find_items(query):
-    sql= """SELECT id, title FROM items WHERE title LIKE ? OR description LIKE ? ORDER BY id DESC"""
+    sql= """SELECT id, title 
+        FROM items WHERE title LIKE ? OR description
+        LIKE ? ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])
 
