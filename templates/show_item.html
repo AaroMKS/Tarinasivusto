@@ -45,8 +45,8 @@
   {% if session.user_id %}
   <h3>Uusi arvostelu</h3>
   <form action="/create_review" method="post">
-    Arvosana (väliltä 1-10):
-    <select name="grade">
+    <label for="grade">Arvosana (väliltä 1-10):</label>
+    <select name="grade" id="grade">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -58,7 +58,7 @@
       <option value="9">9</option>
       <option value="10">10</option>
     </select>
-    <br />
+    <br /><br />
     <label for="review">Kirjoita arvostelu: </label><br />
     <textarea name="review" id="review" rows="10" cols="70" maxlength="400" ></textarea> <br />
     <input type="hidden" name="item_id" value="{{  item.id  }}" />
