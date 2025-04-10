@@ -31,8 +31,3 @@ CREATE TABLE item_classes (
     value TEXT
 );
 
-CREATE TABLE images (
-    id INTEGER PRIMARY KEY,
-    item_id INTEGER REFERENCES items,
-    image BLOB
-);
