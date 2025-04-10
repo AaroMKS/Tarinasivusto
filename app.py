@@ -90,7 +90,7 @@ def edit_item(item_id):
 
     return render_template("edit_item.html", item = item, classes = classes, all_classes = all_classes)
 
-@app.route("/remove_item/<int:item_id>", methods = ["GET","POST"])
+@app.route("/remove_item/<int:item_id>", methods = ["GET", "POST"])
 def remove_item(item_id):
     require_login()
     item = items.get_item(item_id)
@@ -130,12 +130,12 @@ def update_item():
 
     for entry in request.form.getlist("classes"):
         if entry:
-            class_title,class_value = entry.split(":")
+            class_title, class_value = entry.split(":")
             if class_title not in all_classes:
                 abort(403)
             if class_value not in all_classes[class_title]:
                 abort(403)
-            classes.append((class_title,class_value))
+            classes.append((class_title, class_value))
 
     items.update_item(item_id, title, description, story, classes)
     return redirect("/item/"+str(item_id))
@@ -166,12 +166,12 @@ def create_item():
 
     for entry in request.form.getlist("classes"):
         if entry:
-            class_title,class_value = entry.split(":")
+            class_title, class_value = entry.split(":")
             if class_title not in all_classes:
                 abort(403)
             if class_value not in all_classes[class_title]:
                 abort(403)
-            classes.append((class_title,class_value))
+            classes.append((class_title, class_value))
 
     items.add_item(title, description, story, user_id, classes)
     return redirect("/")
@@ -210,13 +210,13 @@ def create():
         flash("VIRHE: Salasanat eivät ole samat")
         return redirect("/register")
     try:
-        users.create_user(username,password1)
+        users.create_user(username, password1)
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
     return redirect("/")
 
-@app.route("/login", methods = ["GET","POST"])
+@app.route("/login", methods = ["GET", "POST"])
 def login():
     if request.method == "GET":
         return render_template("login.html")
