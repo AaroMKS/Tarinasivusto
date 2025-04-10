@@ -6,13 +6,12 @@
 {% block content %}
     <h2>Etsi tarina</h2> 
     <form action="/find_item" method="get">
-    
       <p>
         <label for="query">Hakusana:</label>
         <input type="text" name="query" id="query" value="{{ query }}">
       </p>
       <input type="submit" value="Lähetä">
-    </from>
+    </form>
     
     {% if query %}
     <h2>Tulokset</h2>

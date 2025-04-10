@@ -48,7 +48,7 @@ def find_item():
     if query:
         results = items.find_items(query)
     else:
-        query = " "
+        query = ""
         results = []
     return render_template("find_item.html", query = query, results = results)
 
