@@ -35,14 +35,17 @@ def get_reviews(item_id):
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
     return db.query(sql, [item_id])
-def get_items():
+def get_items(page, page_size):
     sql = """SELECT items.id, items.title, users.id user_id, users.username, 
         COALESCE(SUM(reviews.grade)/COUNT(reviews.id), '-') review_average
         FROM items JOIN users ON items.user_id = users.id
         LEFT JOIN reviews on items.id = reviews.item_id
         GROUP BY items.id 
-        ORDER BY items.id DESC"""
-    return db.query(sql)
+        ORDER BY items.id DESC
+        LIMIT ? OFFSET ?"""
+    limit = page_size
+    offset = page_size * (page - 1)
+    return db.query(sql, [limit, offset])
 
 def get_item(item_id):
     sql = """SELECT items.id, items.title, items.description,
@@ -77,3 +80,8 @@ def find_items(query):
         LIKE ? ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])
+
+def count_items():
+    sql = "SELECT count(id) FROM items"
+    result = db.query(sql)
+    return result[0][0]
