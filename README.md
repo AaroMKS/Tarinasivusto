@@ -18,13 +18,13 @@ Sovelluksen nykyinen tilanne:
 * Käyttäjä pystyy arvioimaan julkaistuja tarinoita.
 
 Sovelluksen testaaminen suurella käyttäjämäärällä:
-*Loin sovellukseen 100 käyttäjää, 10000 tarinaa ja 100000 arvostelua.
-*Sovelluksen käynnistämisessä oli pieni viive. 
-*Lisätyt tarinat ja arvostelut näkyvät oikein sovelluksessa.
-*Etusivu toimii melko nopeasti ja sivujenvaihdossa ei ole viivettä. 
-*Tarinoiden hakemisessa on pieni viive, jos niitä hakee useita samanaikaisesti. 
-*Tunnusten luonti ja sisäänkirjautuminen toimii yhä yhtä nopeasti. 
-*Arvostelujen antaminen, tarinoiden luominen, muokkaaminen ja poistaminen toimivat yhä viiveettä. 
+* Loin sovellukseen 100 käyttäjää, 10000 tarinaa ja 100000 arvostelua.
+* Sovelluksen käynnistämisessä oli pieni viive. 
+* Lisätyt tarinat ja arvostelut näkyvät oikein sovelluksessa.
+* Etusivu toimii melko nopeasti ja sivujenvaihdossa ei ole viivettä. 
+* Tarinoiden hakemisessa on pieni viive, jos niitä hakee useita samanaikaisesti. 
+* Tunnusten luonti ja sisäänkirjautuminen toimii yhä yhtä nopeasti. 
+* Arvostelujen antaminen, tarinoiden luominen, muokkaaminen ja poistaminen toimivat yhä viiveettä. 
   
 ##Sovelluksen käynnistys
 Asenna "flask"-kirjasto:
