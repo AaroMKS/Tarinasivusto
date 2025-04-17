@@ -17,12 +17,12 @@
    
   <div class="item">
   <p> 
-    Juonikuvaus: {{ item.description | show_lines }}
+    <p class="text">Juonikuvaus: {{ item.description | show_lines }}</p>
   </p>
   </div>
 
   <p>
-    {{ item.story | show_lines  }} 
+    <p class="text">{{ item.story|show_lines }}</p>
   </p>
 
   <p>
@@ -41,7 +41,11 @@
   <h3>Arvostelut</h3>
   <ul>
     {% for post in reviews %}
-    <li>{{  post.grade }}, {{  post.review  }}, <a href="/user/{{ post.user_id }}">{{  post.username  }}</a></li>
+    <li>
+      {{ post.grade }},
+      <span class="text">{{ post.review | show_lines }}</span>,
+      <a href="/user/{{ post.user_id }}">{{ post.username }}</a>
+    </li>
     {% endfor %}
   </ul>
   {% if session.user_id %}

@@ -220,7 +220,7 @@ def create():
     password2 = request.form["password2"]
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat")
-        return redirect("/register")
+        return render_template("register.html", username=username)
     try:
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
@@ -236,7 +236,6 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         user_id = users.check_login(username, password)
-        print(user_id)
         if user_id:
             session["user_id"] = user_id
             session["username"] = username
@@ -244,7 +243,7 @@ def login():
             return redirect("/")
         
         flash("VIRHE: Väärä tunnus tai salasana")
-        return redirect("/login")
+        return render_template("login.html", username=username)
 
 @app.route("/logout")
 def logout():

@@ -9,7 +9,7 @@
   <form action="/login" method="post">
     <p>
       <label for="username">Käyttäjänimi:</label>
-      <input type="text" id="username" name="username">
+      <input type="text" id="username" name="username" value="{{ username|default('') }}">
     </p>
     <p>
       <label for="password">Salasana:</label>
