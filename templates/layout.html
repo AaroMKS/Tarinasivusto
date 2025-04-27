@@ -10,18 +10,18 @@
 <body>
   <h1>Tarinasivusto</h1> 
 
+  <div class="item">
 
-<div class="item">
-  {% if session.user_id %}
-  <p>
-    Olet kirjautunut sisään nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>  
-  </p>
+    {% if session.get('user_id') %}
+    <p>
+      Olet kirjautunut sisään nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>  
+    </p>
 {% endif %}
 
 <p>
 <a href="/">Etusivu</a> |
 <a href="/find_item">Etsi tarina</a> |
-{% if session.username %}
+{% if session.get('user_id') %}
 <a href="/new_item">Uusi tarina</a> |
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
