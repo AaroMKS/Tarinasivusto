@@ -218,6 +218,9 @@ def create():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
+    if username == "" or password2 == "" or password2 == "":
+        flash("VIRHE: Kentät eivät voi olla tyhjiä")
+        return render_template("register.html", username=username)
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat")
         return render_template("register.html", username=username)
