@@ -240,6 +240,7 @@ def login():
             session["user_id"] = user_id
             session["username"] = username
             session["csrf_token"] = secrets.token_hex(16)
+            flash("Tervetuloa!")
             return redirect("/")
         
         flash("VIRHE: Väärä tunnus tai salasana")

@@ -6,11 +6,12 @@
   <link rel="stylesheet" href="/static/main.css">
 </head>
 
+
 <body>
   <h1>Tarinasivusto</h1> 
 
 
-
+<div class="item">
   {% if session.user_id %}
   <p>
     Olet kirjautunut sisään nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>  
@@ -33,6 +34,7 @@
     <b>{{ message }}</b>
   </p>
 {% endfor %}
+</div>
 
 {% block content %}{% endblock %}
 
