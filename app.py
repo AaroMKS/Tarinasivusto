@@ -229,7 +229,13 @@ def create():
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
+    user_id = users.check_login(username, password1)
+    session["user_id"] = user_id
+    session["username"] = username
+    session["csrf_token"] = secrets.token_hex(16)
+    flash("Tervetuloa!")
     return redirect("/")
+    
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
