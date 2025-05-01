@@ -33,6 +33,8 @@ def show_lines(content):
 @app.route("/")
 @app.route("/<int:page>")
 def index(page=1):
+    if "user_id" not in session:
+        flash("Kirjaudu sisään tai luo tunnus julkaistaksesi tarinoita")
     page_size = 10
     thread_count = items.count_items()
     page_count = math.ceil(thread_count / page_size)
@@ -183,11 +185,14 @@ def create_item():
     for entry in request.form.getlist("classes"):
         if entry:
             class_title, class_value = entry.split(":")
+            #if class_value=="":
+                #class_value="-"
             if class_title not in all_classes:
                 abort(403)
             if class_value not in all_classes[class_title]:
                 abort(403)
             classes.append((class_title, class_value))
+    
 
     items.add_item(title, description, story, user_id, classes)
     return redirect("/")
