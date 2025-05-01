@@ -70,6 +70,10 @@ def show_item(item_id):
     if not item:
         abort(404)
     classes = items.get_classes(item_id)
+    #print("CLASSES:", classes)
+    for row in classes:
+        print(dict(row))
+
     reviews = items.get_reviews(item_id)
     
     return render_template("show_item.html", item=item, classes=classes, reviews=reviews)
