@@ -204,7 +204,7 @@ def create_review():
 
     review = request.form["review"]
     item_id = request.form["item_id"]
-    if not review: 
+    if not review:
         flash("VIRHE: Arvostelu ei voi olla tyhjä")
         return redirect("/item/"+str(item_id))
     if len(review)>400:
