@@ -15,7 +15,7 @@
     </p>
     <p>
       <label for="description">Juonikuvaus: </label><br />
-      <textarea name="description" id="description" rows="10" cols="70" maxlength="400">{{ item.description }}</textarea required>
+      <textarea name="description" id="description" rows="10" cols="70" maxlength="400" required>{{ item.description }} </textarea>
     </p>
     
     <input type="hidden" name="item_id" value="{{ item.id }}" />
@@ -38,7 +38,7 @@
     
     <p>
       <label for="story">Tarina: </label> <br />
-      <textarea name="story" id="story" rows="50" cols="100">{{ item.story }}</textarea required>
+      <textarea name="story" id="story" rows="50" cols="100" required>{{ item.story }}</textarea required>
     </p>
     
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
