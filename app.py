@@ -11,7 +11,6 @@ import items
 import users
 
 
-
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
@@ -36,6 +35,7 @@ def show_lines(content):
 def index(page=1):
     if "user_id" not in session:
         flash("Kirjaudu sisään tai luo tunnus julkaistaksesi tarinoita")
+
     page_size = 10
     thread_count = items.count_items()
     page_count = math.ceil(thread_count / page_size)
@@ -45,6 +45,7 @@ def index(page=1):
         return redirect("/1")
     if page > page_count:
         return redirect("/" + str(page_count))
+
     all_items = items.get_items(page, page_size)
     return render_template("index.html", page=page, page_count=page_count, items = all_items)
 
@@ -72,7 +73,6 @@ def show_item(item_id):
     if not item:
         abort(404)
     classes = items.get_classes(item_id)
-
     reviews = items.get_reviews(item_id)
 
     return render_template("show_item.html", item=item, classes=classes, reviews=reviews)
@@ -85,23 +85,22 @@ def new_item():
     return render_template("new_item.html", classes=classes)
 
 
-
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
     require_login()
     item = items.get_item(item_id)
+
     if not item:
         abort(404)
     if item["user_id"] != session["user_id"]:
         abort(403)
     all_classes=items.get_all_classes()
     classes = {}
+
     for my_class in all_classes:
         classes[my_class] = ""
-
     for entry in items.get_classes(item_id):
         classes[entry["title"]] = entry["value"]
-
 
     return render_template("edit_item.html",
                             item = item,
@@ -124,12 +123,15 @@ def remove_item(item_id):
             return redirect("/")
         return redirect("/item/"+str(item_id))
     return abort(405)
+
 @app.route("/update_item", methods = ["POST"])
 def update_item():
     require_login()
     check_csrf()
+
     item_id = request.form["item_id"]
     item = items.get_item(item_id)
+
     if not item:
         abort(404)
     if item["user_id"] != session["user_id"]:
@@ -143,6 +145,7 @@ def update_item():
     story = request.form["story"]
     if not story:
         abort(403)
+
     all_classes = items.get_all_classes()
     classes = []
 
@@ -160,7 +163,6 @@ def update_item():
 
 @app.route("/create_item", methods = ["POST"])
 def create_item():
-
     require_login()
     check_csrf()
 
@@ -169,7 +171,6 @@ def create_item():
         abort(403)
 
     description = request.form["description"]
-
     if not description or len(description)>400:
         abort(403)
     story = request.form["story"]
@@ -178,8 +179,6 @@ def create_item():
     user_id = session["user_id"]
 
     all_classes = items.get_all_classes()
-
-
     classes = []
 
     for entry in request.form.getlist("classes"):
@@ -198,9 +197,11 @@ def create_item():
 def create_review():
     require_login()
     check_csrf()
+
     grade = request.form["grade"]
     if not re.search("^([1-9]|10)$", grade):
         abort(403)
+
     review = request.form["review"]
     item_id = request.form["item_id"]
     if not review: 
@@ -208,6 +209,7 @@ def create_review():
         return redirect("/item/"+str(item_id))
     if len(review)>400:
         abort(403)
+
     item_id = request.form["item_id"]
     item = items.get_item(item_id)
     if not item:
@@ -227,6 +229,7 @@ def create():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
+
     if username == "" or password2 == "" or password2 == "":
         flash("VIRHE: Kentät eivät voi olla tyhjiä")
         return render_template("register.html", username=username)
@@ -241,10 +244,12 @@ def create():
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
+
     user_id = users.check_login(username, password1)
     session["user_id"] = user_id
     session["username"] = username
     session["csrf_token"] = secrets.token_hex(16)
+
     flash("Tervetuloa!")
     return redirect("/")
 
